@@ -4,7 +4,6 @@ import requests
 from flask import Flask #microframework to develope web qpp
 from flask import request
 from flask import make_response
-from logger import logger
 
 app=Flask(__name__)
 # app route decorator. when webhook is called, the decorator would call the functions which are e defined
@@ -22,11 +21,10 @@ def webhook():
     return r
 
 def makeResponse(req):
-    log = logger.log()
     sessionID = req.get('responseId')
     result = req.get("queryResult")
     user_says = result.get('queryText')
-    log.write_log(sessionID, "User says: "+user_says)
+    print(sessionID, "User says: "+user_says")
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
     # date = parameters.get("date")
@@ -37,15 +35,9 @@ def makeResponse(req):
     condition = weather[0]['weather'][0]['description']
     date1 = weather[0]['dt_txt']
     speech = "The forecast for " + "city " + city + " on " + date1 + " is " + condition
-    log.write_log(sessionID, "Bot says: "+speech)
     return {
         "fulfillmentText": speech
     }
-    # return {
-    # "speech": speech,
-    # "displayText":speech,
-    # "source":"apiai-weather-webhook"}
-
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 1000))
