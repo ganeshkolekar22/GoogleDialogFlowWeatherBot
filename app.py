@@ -24,7 +24,7 @@ def makeResponse(req):
     sessionID = req.get('responseId')
     result = req.get("queryResult")
     user_says = result.get('queryText')
-    print(sessionID, "User says: "+user_says")
+    print(sessionID, "User says: "+user_says)
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
     # date = parameters.get("date")
