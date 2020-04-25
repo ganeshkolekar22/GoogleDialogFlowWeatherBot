@@ -23,20 +23,19 @@ def webhook():
     return r
 
 def makeResponse(req):
-    # result = req.get("queryResult")
-    # parameters = result.get("parameters")
-    # city = parameters.get("geo-city")
-    # date = parameters.get("date")
+    result = req.get("queryResult")
+    parameters = result.get("parameters")
+    city = parameters.get("geo-city")
+    date = parameters.get("date")
 
-    c = 'asam'
-    r=requests.get('http://api.openweathermap.org/data/2.5/forecast?q='+c+',in&appid=db91df44baf43361cbf73026ce5156cb')
+    r=requests.get('http://api.openweathermap.org/data/2.5/forecast?q='+city+',in&appid=db91df44baf43361cbf73026ce5156cb')
     print(r)
     json_object=r.json()
     weather=json_object['list']
     condition = weather[0]['weather'][0]['description']
-    date = weather[0]['dt_txt']
+    date1 = weather[0]['dt_txt']
     print(date)
-    speech = "The forecast for " + "city " + c + " on " + date + " is " + condition
+    speech = "The forecast for " + "city " + city + " on " + date1 + " is " + condition
     return {
         "fulfillmentText": speech
     }
