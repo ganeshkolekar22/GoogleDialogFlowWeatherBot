@@ -10,10 +10,8 @@ app=Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    print('called')
     #convert data from json
     req = request.get_json(silent=True, force=True)
-    print(json.dumps(req, indent=4))
 
     # extract the relevant information and use api and get the response and send it dialogflow.
     # helper function
@@ -33,13 +31,8 @@ def makeResponse(req):
     # city1 = 'asam'
     r=requests.get('http://api.openweathermap.org/data/2.5/forecast?q='+city+',in&appid=db91df44baf43361cbf73026ce5156cb')
     json_object=r.json()
-    # weather=json_object['list']
-    # condition = weather[0]['weather'][0]['description']
-    # date1 = weather[0]['dt_txt']
     allParam = json_object['list'][0]
-
     date = allParam['dt_txt']
-    # main
     main = allParam['main']
     temp = main['temp']
     humidity = main['humidity']
