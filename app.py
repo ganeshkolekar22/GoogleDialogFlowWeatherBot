@@ -27,8 +27,8 @@ def makeResponse(req):
     user_says = result.get('queryText')
     parameters = result.get("parameters")
     city = parameters.get("geo-city")
+    day = parameters.get('forday')
     # date = parameters.get("date")
-    # city1 = 'asam'
     r=requests.get('http://api.openweathermap.org/data/2.5/forecast?q='+city+',in&appid=db91df44baf43361cbf73026ce5156cb')
     json_object=r.json()
     allParam = json_object['list'][0]
@@ -39,7 +39,7 @@ def makeResponse(req):
     pressure = main['pressure']
     desc = allParam['weather'][0]['description']
 
-    speech = ('date- '+str(date)+' \ntemp: '+str(temp)+' \nhumidity: '+str(humidity)+' \npressure: '+str(pressure)+' \ndescription: '+desc)
+    speech = ('date- '+day+' \ntemp: '+str(temp)+' \nhumidity: '+str(humidity)+' \npressure: '+str(pressure)+' \ndescription: '+desc)
     return {
         "fulfillmentText": speech
     }
