@@ -39,7 +39,7 @@ def makeResponse(req):
     pressure = main['pressure']
     desc = allParam['weather'][0]['description']
     day1 = date.split(" ")[0]
-    speech = ('date- '+day1+' \ntemp: '+str(temp)+' \nhumidity: '+str(humidity)+' \npressure: '+str(pressure)+' \ndescription: '+desc)
+    speech = ("Today's Forcast: \ndate- "+day1+" \ntemp: "+str(temp)+" \nhumidity: "+str(humidity)+" \npressure: "+str(pressure)+" \ndescription: "+desc)
     return {
         "fulfillmentText": speech
     }
