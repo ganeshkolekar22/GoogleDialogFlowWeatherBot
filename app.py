@@ -34,12 +34,13 @@ def makeResponse(req):
     allParam = json_object['list'][0]
     date = allParam['dt_txt']
     main = allParam['main']
-    temp = main['temp']
+    kelvinTemp = main['temp']
+    celsiusTemp = kelvinTemp - 273.15
     humidity = main['humidity']
     pressure = main['pressure']
     desc = allParam['weather'][0]['description']
     day1 = date.split(" ")[0]
-    speech = ("Today's Forcast: \ndate- "+day1+" \ntemp: "+str(temp)+" \nhumidity: "+str(humidity)+" \npressure: "+str(pressure)+" \ndescription: "+desc)
+    speech = ("Today's Forcast: \n date- "+day1+" \ntemp: "+str(celsiusTemp)+" \nhumidity: "+str(humidity)+" \npressure: "+str(pressure)+" \ndescription: "+desc)
     return {
         "fulfillmentText": speech
     }
