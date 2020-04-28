@@ -40,7 +40,7 @@ def makeResponse(req):
     pressure = main['pressure']
     desc = allParam['weather'][0]['description']
     day1 = date.split(" ")[0]
-    speech = ("Today's Forcast: \n date- "+day1+" \ntemp: "+str(celsiusTemp)+" \nhumidity: "+str(humidity)+" \npressure: "+str(pressure)+" \ndescription: "+desc)
+    speech = ("Today's Forcast: \n date- "+day1+" \ntemp: %.2f"+str(format(celsiusTemp, '.2f'))+" \nhumidity: "+str(humidity)+" \npressure: "+str(pressure)+" \ndescription: "+desc)
     return {
         "fulfillmentText": speech
     }
